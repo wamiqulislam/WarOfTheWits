@@ -177,6 +177,12 @@ public class Player {
             battleLabel.setText("No soldier on this path");
         }
         else{
+            if(path.getSoldier(enemyPlayerId) != null &&  path.getSoldier(enemyPlayerId).getPosition() >= 4){
+                path.setSoldier(null, enemyPlayerId);
+                path.setImage(null, enemyPlayerId);
+                battleLabel.setText("killed enemy on path "+pathIndex+1);
+            }
+
             path.setSoldier(trainedSoldier, playerId);
             battleLabel.setText("soldier placed on path" + pathIndex+1);
 
@@ -188,6 +194,7 @@ public class Player {
 
             paths[pathIndex].setImage(trainedSoldierImage, playerId);
 
+            trainedSoldier = null;
             barracksFull = false;
         }
     }
