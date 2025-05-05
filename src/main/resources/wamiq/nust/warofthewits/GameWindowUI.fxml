@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="rootPane1" focusTraversable="true" onKeyPressed="#handleKeyPressed" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="wamiq.nust.warofthewits.GameWindowController">
+
+
+    <ImageView fx:id="backgroundImage" fitHeight="720.0" fitWidth="1280.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <image>
+            <Image url="@../../../images/WOTWBackground1.0.png" />
+        </image>
+    </ImageView>
+   <Label fx:id="p1q" layoutX="121.0" layoutY="363.0" prefHeight="113.0" prefWidth="399.0" style="-fx-background-color: rgb(0,0,0,0.4);" text="p1q" textFill="WHITE" wrapText="true">
+      <font>
+         <Font size="19.0" />
+      </font>
+   </Label>
+   <Label fx:id="p1b" layoutX="296.0" layoutY="484.0" prefHeight="120.0" prefWidth="336.0" style="-fx-background-color: rgb(0,0,0,0.4);" text="p1b" textFill="WHITE" wrapText="true">
+      <font>
+         <Font size="19.0" />
+      </font>
+   </Label>
+   <Label fx:id="p1a" layoutY="484.0" prefHeight="120.0" prefWidth="286.0" style="-fx-background-color: rgb(0,0,0,0.4);" text="p1a" textFill="WHITE" wrapText="true">
+      <font>
+         <Font size="19.0" />
+      </font>
+   </Label>
+   <Label fx:id="p1c" layoutY="611.0" prefHeight="106.0" prefWidth="286.0" style="-fx-background-color: rgb(0,0,0,0.4);" text="p1c" textFill="WHITE" wrapText="true">
+      <font>
+         <Font size="19.0" />
+      </font>
+   </Label>
+   <Label fx:id="p1d" layoutX="296.0" layoutY="608.0" prefHeight="106.0" prefWidth="336.0" style="-fx-background-color: rgb(0,0,0,0.4);" text="p1d" textFill="WHITE" wrapText="true">
+      <font>
+         <Font size="19.0" />
+      </font>
+   </Label>
+   <Label fx:id="p2q" layoutX="769.0" layoutY="360.0" prefHeight="113.0" prefWidth="399.0" style="-fx-background-color: rgb(0,0,0,0.4);" text="p2q" textFill="WHITE" wrapText="true">
+      <font>
+         <Font size="19.0" />
+      </font>
+   </Label>
+   <Label fx:id="p2b" layoutX="944.0" layoutY="481.0" prefHeight="120.0" prefWidth="336.0" style="-fx-background-color: rgb(0,0,0,0.4);" text="p2b" textFill="WHITE" wrapText="true">
+      <font>
+         <Font size="19.0" />
+      </font>
+   </Label>
+   <Label fx:id="p2a" layoutX="648.0" layoutY="481.0" prefHeight="120.0" prefWidth="286.0" style="-fx-background-color: rgb(0,0,0,0.4);" text="p2a" textFill="WHITE" wrapText="true">
+      <font>
+         <Font size="19.0" />
+      </font>
+   </Label>
+   <Label fx:id="p2c" layoutX="648.0" layoutY="608.0" prefHeight="106.0" prefWidth="286.0" style="-fx-background-color: rgb(0,0,0,0.4);" text="p2c" textFill="WHITE" wrapText="true">
+      <font>
+         <Font size="19.0" />
+      </font>
+   </Label>
+   <Label fx:id="p2d" layoutX="944.0" layoutY="605.0" prefHeight="106.0" prefWidth="336.0" style="-fx-background-color: rgb(0,0,0,0.4);" text="p2d" textFill="WHITE" wrapText="true">
+      <font>
+         <Font size="19.0" />
+      </font>
+   </Label>
+   <VBox layoutX="533.0" layoutY="363.0" prefHeight="113.0" prefWidth="234.0" spacing="5.0">
+      <children>
+         <Button mnemonicParsing="false" prefHeight="53.0" prefWidth="231.0" text="Options" />
+         <Button mnemonicParsing="false" prefHeight="53.0" prefWidth="231.0" text="Main menu" />
+      </children>
+   </VBox>
+   <Label fx:id="feedbackLabel1" layoutX="14.0" layoutY="363.0" prefHeight="113.0" prefWidth="97.0" style="-fx-background-color: rgb(0,0,0,0.4);" textFill="WHITE" wrapText="true">
+      <font>
+         <Font size="19.0" />
+      </font>
+   </Label>
+   <Label fx:id="feedbackLabel2" layoutX="1175.0" layoutY="363.0" prefHeight="113.0" prefWidth="97.0" style="-fx-background-color: rgb(0,0,0,0.4);" textFill="WHITE" wrapText="true">
+      <font>
+         <Font size="19.0" />
+      </font>
+   </Label>
+   <Label fx:id="goldLabel1" layoutX="14.0" layoutY="234.0" prefHeight="113.0" prefWidth="97.0" style="-fx-background-color: rgb(0,0,0,0.4);" text="Gold: " textFill="WHITE" wrapText="true">
+      <font>
+         <Font size="19.0" />
+      </font>
+   </Label>
+   <Label fx:id="goldLabel2" layoutX="1169.0" layoutY="229.0" prefHeight="113.0" prefWidth="97.0" style="-fx-background-color: rgb(0,0,0,0.4);" text="Gold: " textFill="WHITE" wrapText="true">
+      <font>
+         <Font size="19.0" />
+      </font>
+   </Label>
+   <Label fx:id="battleLabel1" layoutX="11.0" layoutY="8.0" prefHeight="113.0" prefWidth="97.0" style="-fx-background-color: rgb(0,0,0,0.4);" textFill="WHITE" wrapText="true">
+      <font>
+         <Font size="19.0" />
+      </font>
+   </Label>
+   <Label fx:id="battleLabel2" layoutX="1168.0" layoutY="11.0" prefHeight="113.0" prefWidth="97.0" style="-fx-background-color: rgb(0,0,0,0.4);" textFill="WHITE" wrapText="true">
+      <font>
+         <Font size="19.0" />
+      </font>
+   </Label>
+   <ImageView fx:id="barracks1" fitHeight="86.0" fitWidth="80.0" layoutX="30.0" layoutY="138.0" pickOnBounds="true" preserveRatio="true" />
+   <ImageView fx:id="barracks2" fitHeight="86.0" fitWidth="80.0" layoutX="1174.0" layoutY="136.0" pickOnBounds="true" preserveRatio="true" />
+   <ImageView fx:id="p1path0" fitHeight="86.0" fitWidth="80.0" layoutX="140.0" layoutY="40.0" pickOnBounds="true" preserveRatio="true" />
+   <ImageView fx:id="p1path1" fitHeight="86.0" fitWidth="80.0" layoutX="140.0" layoutY="140.0" pickOnBounds="true" preserveRatio="true" />
+   <ImageView fx:id="p1path2" fitHeight="86.0" fitWidth="80.0" layoutX="140.0" layoutY="240.0" pickOnBounds="true" preserveRatio="true" />
+   <ImageView fx:id="p2path0" fitHeight="86.0" fitWidth="80.0" layoutX="1040.0" layoutY="40.0" pickOnBounds="true" preserveRatio="true" />
+   <ImageView fx:id="p2path1" fitHeight="86.0" fitWidth="80.0" layoutX="1040.0" layoutY="140.0" pickOnBounds="true" preserveRatio="true" />
+   <ImageView fx:id="p2path2" fitHeight="86.0" fitWidth="80.0" layoutX="1040.0" layoutY="240.0" pickOnBounds="true" preserveRatio="true" />
+</AnchorPane>
