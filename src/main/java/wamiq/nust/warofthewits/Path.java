@@ -4,8 +4,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 public class Path {
-    private Soldier[] soldiers = {null, null};
-    private ImageView[] images = new ImageView[2];
+    private final Soldier[] soldiers = {null, null};
+    private final ImageView[] images = new ImageView[2];
 
     Path(ImageView[] images){
         this.images[0] = images[0];

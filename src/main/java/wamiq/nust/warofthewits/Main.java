@@ -2,12 +2,8 @@ package wamiq.nust.warofthewits;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Rectangle2D;
-import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.layout.StackPane;
-import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -30,7 +26,7 @@ public class Main extends Application {
         stage.show();
 
         // for fullscreen when maximised
-        stage.maximizedProperty().addListener((obs, wasMaximized, isNowMaximized) -> {
+        stage.maximizedProperty().addListener((_, _, isNowMaximized) -> {
             if (isNowMaximized) {
                 stage.setFullScreen(true);
             }

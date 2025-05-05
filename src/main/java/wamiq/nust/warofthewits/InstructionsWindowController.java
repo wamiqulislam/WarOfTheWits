@@ -13,10 +13,10 @@ import javafx.stage.Stage;
 import java.io.File;
 
 public class InstructionsWindowController {
-    @FXML
-    private Stage stage;
-    private Scene scene;
-    private Parent root;
+
+    @FXML private Stage stage;
+    @FXML private Scene scene;
+    @FXML private Parent root;
 
     @FXML private TextField textInput;
     @FXML private Label feedbackLabel;

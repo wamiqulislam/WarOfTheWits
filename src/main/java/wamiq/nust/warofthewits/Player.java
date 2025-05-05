@@ -7,6 +7,7 @@ import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Random;
 
 public class Player {
@@ -60,8 +61,8 @@ public class Player {
         this.paths = paths;
         this.rand = new Random();
 
-        attackerImage = new Image(getClass().getResource("/images/ATTACKER"+(playerId+1)+".png").toExternalForm());
-        defenderImage = new Image(getClass().getResource("/images/DEFENDER"+(playerId+1)+".png").toExternalForm());
+        attackerImage = new Image(Objects.requireNonNull(getClass().getResource("/images/ATTACKER" + (playerId + 1) + ".png")).toExternalForm());
+        defenderImage = new Image(Objects.requireNonNull(getClass().getResource("/images/DEFENDER" + (playerId + 1) + ".png")).toExternalForm());
     }
 
     public void loadNextQuestion() {
@@ -172,6 +173,9 @@ public class Player {
         if(path.getSoldier(playerId) != null) {
             moveSoldier(pathIndex);
         }
+        else if(trainedSoldier == null){
+            battleLabel.setText("No soldier on this path");
+        }
         else{
             path.setSoldier(trainedSoldier, playerId);
             battleLabel.setText("soldier placed on path" + pathIndex+1);
@@ -193,10 +197,7 @@ public class Player {
         Soldier mySoldier = path.getSoldier(playerId);
         Soldier enemySoldier = path.getSoldier(enemyPlayerId);
         int mySoldierPosition = mySoldier.getPosition();
-        if(mySoldier == null){
-            battleLabel.setText("No soldier on this path");
-            return;
-        }
+
         if(gold < mySoldier.getMoveCost()){
             battleLabel.setText("Not enough gold to move soldier");
             return;
@@ -220,7 +221,7 @@ public class Player {
             mySoldier.setPosition(mySoldier.getPosition()+1);
             transaction(-mySoldier.getMoveCost());
 
-            int deltaX = playerId == 0? 200: -200;
+            int deltaX = playerId == 0? 225: -225;
             double x = path.getImageView(playerId).getLayoutX() + deltaX;
             path.getImageView(playerId).setLayoutX(x);
         }

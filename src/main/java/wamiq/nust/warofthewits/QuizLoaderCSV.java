@@ -32,7 +32,7 @@ public class QuizLoaderCSV {
             }
 
         } catch (IOException e) {
-            System.out.println("Errorxxxxxxx: " + e.getMessage());
+            System.out.println("Error: " + e.getMessage());
         }
 
         return new Quiz(quizTitle, questions);
