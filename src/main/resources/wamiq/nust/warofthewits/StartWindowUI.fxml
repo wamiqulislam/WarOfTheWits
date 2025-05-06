@@ -11,11 +11,9 @@
       <Label fx:id="label1" layoutX="151.0" layoutY="107.0" prefHeight="17.0" prefWidth="105.0" text="Label1" />
       <Label layoutX="406.0" layoutY="99.0" prefHeight="17.0" prefWidth="97.0" text="Label2" />
       <VBox layoutX="227.0" layoutY="204.0" prefHeight="88.0" prefWidth="147.0" spacing="10.0" AnchorPane.bottomAnchor="108.0" AnchorPane.leftAnchor="227.0" AnchorPane.rightAnchor="227.0" AnchorPane.topAnchor="204.0">
-         <children>
             <Button mnemonicParsing="false" onAction="#Exit" prefHeight="30.0" prefWidth="150.0" text="Exit" />
             <Button mnemonicParsing="false" onAction="#startToInstructions" prefHeight="30.0" prefWidth="150.0" text="Start" />
             <Button mnemonicParsing="false" onAction="#startToOptions" prefHeight="30.0" prefWidth="150.0" text="Options" />
-         </children>
       </VBox>
    </children>
 </AnchorPane>
