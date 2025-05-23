@@ -44,13 +44,13 @@ public class InstructionsWindowController {
         }
 
         if(quizComboBox.getItems().isEmpty()){
-            feedbackLabel.setText("No Quizes Found! Please go to Options to add Quizes.");
+            feedbackLabel.setText("No Quizes Found! Go to Options to add Quizes.");
         }
 
 
         instructionHeadings = List.of(
                 "Introduction",
-                "Loading Quizzes",
+                "Adding Quizzes",
                 "Selecting a Quiz",
                 "Gameplay Overview",
                 "Earning & Spending Gold",
@@ -70,9 +70,9 @@ public class InstructionsWindowController {
 
                 // Loading Quizzes
                 """
-                        \t\t\tLoading Quizzes
+                        \t\t\tAdding Quizzes
                         
-                        To load a new quiz, open the Options menu and either drag-and-drop a CSV file into the designated area or click Browse to select it. \
+                        To add a new quiz, open the Options menu and either drag-and-drop a CSV file into the designated area or click Browse to select it. \
                         Your file must be comma-separated with each line in the format:
                         question, choice1, choice2, choice3, choice4, correct choice number""",
 

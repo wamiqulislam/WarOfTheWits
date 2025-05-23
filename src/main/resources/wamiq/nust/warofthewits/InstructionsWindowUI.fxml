@@ -19,7 +19,7 @@
       <ComboBox fx:id="quizComboBox" prefHeight="25.0" prefWidth="374.0" promptText="Choose your Quiz" />
             <Button mnemonicParsing="false" onAction="#instructionsToGame" onMouseEntered="#playHoverSound" onMouseReleased="#playPressSound" prefHeight="25.0" prefWidth="393.0" text="Start" />
       <Button mnemonicParsing="false" onAction="#instructionsToStart" onMouseEntered="#playHoverSound" onMouseReleased="#playPressSound" prefHeight="25.0" prefWidth="393.0" text="Back" />
-      <Label fx:id="feedbackLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="62.0" prefWidth="377.0" textFill="RED">
+      <Label fx:id="feedbackLabel" wrapText="true" alignment="CENTER" contentDisplay="CENTER" prefHeight="62.0" prefWidth="377.0" textFill="RED">
          <font>
             <Font name="System Bold" size="16.0" />
          </font></Label>
