@@ -7,7 +7,7 @@ public class Path {
     private final Soldier[] soldiers = {null, null};
     private final ImageView[] images = new ImageView[2];
 
-    Path(ImageView[] images){
+    public Path(ImageView[] images){
         this.images[0] = images[0];
         this.images[1] = images[1];
     }

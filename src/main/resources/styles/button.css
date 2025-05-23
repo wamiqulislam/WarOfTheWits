@@ -1,0 +1,83 @@
+.button {
+    -fx-background-color: linear-gradient(#ffb347, #ff8008);
+    -fx-text-fill: white;
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 10;
+    -fx-padding: 10 20 10 20;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 6, 0.0, 0, 3);
+    -fx-border-color: #e67300;
+    -fx-border-width: 1;
+    -fx-border-radius: 10;
+}
+
+.button:hover {
+    -fx-background-color: linear-gradient(#ffcc70, #ff9900);
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.4), 8, 0.0, 0, 4);
+}
+
+.button:pressed {
+    -fx-background-color: linear-gradient(#ff8008, #cc6600);
+    -fx-effect: innershadow(gaussian, rgba(0,0,0,0.5), 10, 0.0, 0, 0);
+}
+.combo-box {
+    -fx-background-color: linear-gradient(#ffb347, #ff8008);
+    -fx-text-fill: white;
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 10;
+    -fx-padding: 5 10 5 10;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 6, 0.0, 0, 3);
+    -fx-border-color: #e67300;
+    -fx-border-width: 1;
+    -fx-border-radius: 10;
+}
+
+.combo-box:hover {
+    -fx-background-color: linear-gradient(#ffcc70, #ff9900);
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.4), 8, 0.0, 0, 4);
+}
+
+.combo-box:pressed {
+    -fx-background-color: linear-gradient(#ff8008, #cc6600);
+    -fx-effect: innershadow(gaussian, rgba(0,0,0,0.5), 10, 0.0, 0, 0);
+}
+.combo-box .list-cell {
+    -fx-text-fill: white;
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-background-color: transparent;
+}
+.combo-box-popup .list-view .list-cell {
+    -fx-text-fill: black;
+    -fx-background-color: white;
+}
+
+.combo-box-popup .list-view .list-cell:hover {
+    -fx-background-color: #ffd699;
+}
+.check-box {
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-background-color: linear-gradient(#ffb347, #ff8008);
+    -fx-background-radius: 10;
+    -fx-padding: 5 10 5 10;
+    -fx-alignment: center;
+    -fx-border-color: #e67300;
+    -fx-border-width: 1;
+    -fx-border-radius: 10;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 6, 0.0, 0, 3);
+}
+
+.check-box:hover {
+    -fx-background-color: linear-gradient(#ffcc70, #ff9900);
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.4), 8, 0.0, 0, 4);
+}
+
+.check-box:pressed {
+    -fx-background-color: linear-gradient(#ff8008, #cc6600);
+    -fx-effect: innershadow(gaussian, rgba(0,0,0,0.5), 10, 0.0, 0, 0);
+}
+
+

@@ -17,6 +17,7 @@ public class Quiz {
         return questionList;
     }
 
-
-
+    public String getTitle() {
+        return title;
+    }
 }

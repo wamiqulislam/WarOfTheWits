@@ -1,10 +1,15 @@
 package wamiq.nust.warofthewits;
 
+import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -13,8 +18,10 @@ import java.util.Random;
 public class Player {
     private final Quiz quiz;
     private final List<Question> questionList; // working list of questions
+    private final Stage stage;
     private Question currentQuestion;
     private int skips;
+    private int lastPath;
 
     private static int nextPlayerId = 0;
     private final int playerId;
@@ -31,6 +38,7 @@ public class Player {
     private final Label pc;
     private final Label pd;
     private final Label goldLabel;
+    private final Label skipLabel;
     private final Label battleLabel;
 
     private final ImageView barracks;
@@ -40,7 +48,8 @@ public class Player {
 
     private final Random rand;
 
-    public Player(Quiz quiz, Path[] paths, Label feedbackLabel, Label pq, Label pa, Label pb, Label pc, Label pd, Label goldLabel, Label battleLabel, ImageView barracks) {
+    public Player(Stage stage, Quiz quiz, Path[] paths, Label feedbackLabel, Label pq, Label pa, Label pb, Label pc, Label pd, Label goldLabel, Label skipLabel, Label battleLabel, ImageView barracks) {
+        this.stage = stage;
         this.quiz = quiz;
         this.feedbackLabel = feedbackLabel;
         this.pa = pa;
@@ -49,6 +58,7 @@ public class Player {
         this.pd = pd;
         this.pq = pq;
         this.goldLabel = goldLabel;
+        this.skipLabel = skipLabel;
         this.battleLabel = battleLabel;
         this.barracks = barracks; // {barracks, path0, path1, path2}
 
@@ -83,7 +93,7 @@ public class Player {
     }
 
     private void displayQuestion(Question question) {
-        System.out.println(question.getQuestionText() + "xxxxxxxxxx");
+        System.out.println(question.getQuestionText());
         pq.setText("Q: " + question.getQuestionText());
         List<String> choices = question.getAnswers();
         // Assuming there are always 4 choices.
@@ -100,7 +110,6 @@ public class Player {
             return;
         }
 
-        System.out.println("processing answer player1");
 
         if(ans == 5){
             if(skips<=0){
@@ -111,8 +120,7 @@ public class Player {
             feedbackLabel.setText("Skipped!");
             feedbackLabel.setTextFill(Color.LIGHTBLUE);
             skips--;
-            loadNextQuestion();
-            return;
+            skipLabel.setText("Skips: "+ skips);
         }
         else if (currentQuestion.isCorrect(ans)) {
             // If question is answered, remove it from the list.
@@ -127,19 +135,19 @@ public class Player {
             transaction(-10);
         }
         //updates gold label
-        goldLabel.setText("Gold: "+ gold);
+        goldLabel.setText(""+gold);
         // Load the next question (if any)
         loadNextQuestion();
     }
 
     public void trainSoldier(String type) {
         if(barracksFull){
-            battleLabel.setText("soldier already trained!");
+            battleLabel.setText("Soldier already trained!");
             return;
         }
         if(type.equals("Attacker")){
-            if(gold < Attacker.getStaticTrainCost()){
-                battleLabel.setText("not enough gold!");
+            if(gold < Attacker.TRAIN_COST){
+                battleLabel.setText("Not enough Gold to train!");
                 return;
             }
             battleLabel.setText("Attacker trained!");
@@ -151,8 +159,8 @@ public class Player {
 
         }
         else if(type.equals("Defender")){
-            if(gold < Defender.getStaticTrainCost()){
-                battleLabel.setText("not enough gold!");
+            if(gold < Defender.TRAIN_COST){
+                battleLabel.setText("Not enough Gold to train!");
                 return;
             }
             battleLabel.setText("Defender trained!");
@@ -163,11 +171,12 @@ public class Player {
             barracks.setImage(trainedSoldierImage);
         }
 
-        goldLabel.setText("Gold: "+ gold);
+        goldLabel.setText(""+ gold);
 
     }
 
     public void placeSoldier(int pathIndex) {
+        this.lastPath = pathIndex + 1;
         Path path = paths[pathIndex];
 
         if(path.getSoldier(playerId) != null) {
@@ -180,16 +189,16 @@ public class Player {
             if(path.getSoldier(enemyPlayerId) != null &&  path.getSoldier(enemyPlayerId).getPosition() >= 4){
                 path.setSoldier(null, enemyPlayerId);
                 path.setImage(null, enemyPlayerId);
-                battleLabel.setText("killed enemy on path "+pathIndex+1);
+                battleLabel.setText("Killed enemy on path "+(pathIndex+1));
             }
 
             path.setSoldier(trainedSoldier, playerId);
-            battleLabel.setText("soldier placed on path" + pathIndex+1);
+            battleLabel.setText("Soldier placed on path" + (pathIndex+1));
 
             barracks.setImage(null); // barracks image cleared
 
             //x set to starting position of path depending on player
-            int x = playerId==0?140:1040;
+            int x = playerId==0?165:1059;
             paths[pathIndex].getImageView(playerId).setLayoutX(x);
 
             paths[pathIndex].setImage(trainedSoldierImage, playerId);
@@ -206,25 +215,25 @@ public class Player {
         int mySoldierPosition = mySoldier.getPosition();
 
         if(gold < mySoldier.getMoveCost()){
-            battleLabel.setText("Not enough gold to move soldier");
+            battleLabel.setText("Not enough gold to move");
             return;
         }
 
         if(enemySoldier != null &&  mySoldierPosition + enemySoldier.getPosition() == 3){
             path.setSoldier(null, enemyPlayerId);
             path.setImage(null, enemyPlayerId);
-            battleLabel.setText("killed enemy on path "+pathIndex+1);
+            battleLabel.setText("Killed enemy on path "+(pathIndex+1));
             transaction(-mySoldier.getMoveCost());
             return;
         }
         else if (mySoldierPosition >= 4){
-            battleLabel.setText("P"+playerId+" has won");
+            battleLabel.setText("Player "+(playerId+1)+" has won");
             transaction(-mySoldier.getMoveCost());
-            //endGame();
+            endGame();
             return;
         }
         else{
-            battleLabel.setText("soldier moved on path "+pathIndex+1);
+            battleLabel.setText("Soldier moved on path "+ (pathIndex+1));
             mySoldier.setPosition(mySoldier.getPosition()+1);
             transaction(-mySoldier.getMoveCost());
 
@@ -232,30 +241,42 @@ public class Player {
             double x = path.getImageView(playerId).getLayoutX() + deltaX;
             path.getImageView(playerId).setLayoutX(x);
         }
-        goldLabel.setText("Gold: "+ gold);
+        goldLabel.setText(""+ gold);
 
     }
 
     private void transaction(int cost){
-        if(cost > 0){
             gold += cost;
-        }
-        else{
-            cost*=-1;
-            if(gold <= cost){
-                gold = 0;
-            }
-            else{
-                gold -= cost;
-            }
-        }
     }
 
-    public List<Question> getQuestionList() {
-        return questionList;
-    }
 
-    public Question getCurrentQuestion() {
-        return currentQuestion;
+    private void endGame(){
+
+        Alert alert = new Alert(Alert.AlertType.NONE);
+        alert.getDialogPane().getButtonTypes().addAll(ButtonType.OK);
+        alert.getDialogPane().getStylesheets().add(Objects.requireNonNull(getClass().getResource("/styles/button.css")).toExternalForm());
+
+
+        alert.setTitle("Game Ended");
+        alert.setHeaderText("Player "+(playerId+1)+" won");
+        alert.setContentText("Congratulations Player "+(playerId+1)+", you have won this Battle on Path "+lastPath+".");
+
+        alert.showAndWait();
+
+        resetPlayerIds();
+
+        try{
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("StartWindowUI.fxml"));
+        SceneChanger sceneChanger = new SceneChanger();
+        sceneChanger.changeScene(stage ,fxmlLoader);
+
+        MusicPlayer.getInstance().changeTrack(0);
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+    public static void resetPlayerIds(){
+        nextPlayerId =0;
     }
 }

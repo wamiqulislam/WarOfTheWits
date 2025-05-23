@@ -1,21 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<AnchorPane xmlns="http://javafx.com/javafx/23.0.1"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="wamiq.nust.warofthewits.StartWindowController"
+            prefWidth="1280" prefHeight="720">
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="wamiq.nust.warofthewits.StartWindowController">
-   <children>
-      <Label fx:id="label1" layoutX="151.0" layoutY="107.0" prefHeight="17.0" prefWidth="105.0" text="Label1" />
-      <Label layoutX="406.0" layoutY="99.0" prefHeight="17.0" prefWidth="97.0" text="Label2" />
-      <VBox layoutX="227.0" layoutY="204.0" prefHeight="88.0" prefWidth="147.0" spacing="10.0" AnchorPane.bottomAnchor="108.0" AnchorPane.leftAnchor="227.0" AnchorPane.rightAnchor="227.0" AnchorPane.topAnchor="204.0">
-         <children>
-            <Button mnemonicParsing="false" onAction="#Exit" prefHeight="30.0" prefWidth="150.0" text="Exit" />
-            <Button mnemonicParsing="false" onAction="#startToInstructions" prefHeight="30.0" prefWidth="150.0" text="Start" />
-            <Button mnemonicParsing="false" onAction="#startToOptions" prefHeight="30.0" prefWidth="150.0" text="Options" />
-         </children>
-      </VBox>
-   </children>
+   <ImageView fitWidth="1280" fitHeight="720" preserveRatio="false"
+              pickOnBounds="true">
+      <image>
+         <Image url="@../../../images/StartWindowBackground.png" />
+      </image>
+   </ImageView>
+   <VBox alignment="CENTER"
+         spacing="20.0"
+         layoutX="540.0"
+         layoutY="300.0"
+         prefWidth="200.0"
+         prefHeight="200.0">
+
+      <Button text="Start"
+              onAction="#startToInstructions"
+              prefWidth="200.0" prefHeight="50.0"
+              fx:id="startBtn"
+              onMouseEntered="#playHoverSound"
+              onMouseReleased="#playPressSound"/>
+
+      <Button text="Options"
+              onAction="#startToOptions"
+              prefWidth="200.0" prefHeight="50.0"
+              fx:id="optionsBtn"
+              onMouseEntered="#playHoverSound"
+              onMouseReleased="#playPressSound"/>
+
+      <Button text="Exit"
+              onAction="#Exit"
+              prefWidth="200.0" prefHeight="50.0"
+              fx:id="exitBtn"
+              onMouseEntered="#playHoverSound"
+              onMouseReleased="#playPressSound"/>
+
+
+   </VBox>
 </AnchorPane>

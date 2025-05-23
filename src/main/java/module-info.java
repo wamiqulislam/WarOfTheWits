@@ -10,7 +10,10 @@ module wamiq.nust.warofthewits {
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
     requires com.almasb.fxgl.all;
+    requires java.desktop;
+    requires javafx.media;
 
     opens wamiq.nust.warofthewits to javafx.fxml;
     exports wamiq.nust.warofthewits;
+
 }

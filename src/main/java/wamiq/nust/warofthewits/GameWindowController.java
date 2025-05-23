@@ -1,21 +1,30 @@
 package wamiq.nust.warofthewits;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.util.Duration;
+
+import java.util.Objects;
+import java.util.Optional;
 
 public class GameWindowController {
-    @FXML private Stage stage;
-    @FXML private Scene scene;
-    @FXML private Parent root;
 
-    @FXML private ImageView backgroundImage;
     @FXML private AnchorPane rootPane1;
+    @FXML private ImageView backgroundImage;
+    @FXML private CheckBox showHelp;
+
 
     @FXML private Label feedbackLabel1;
     @FXML private Label p1q;
@@ -24,11 +33,13 @@ public class GameWindowController {
     @FXML private Label p1c;
     @FXML private Label p1d;
     @FXML private Label goldLabel1;
+    @FXML private Label skipLabel1;
     @FXML private Label battleLabel1;
     @FXML private ImageView barracks1;
     @FXML private ImageView p1path0;
     @FXML private ImageView p1path1;
     @FXML private ImageView p1path2;
+    @FXML private ImageView goldImage1;
 
 
     @FXML private Label feedbackLabel2;
@@ -38,11 +49,23 @@ public class GameWindowController {
     @FXML private Label p2c;
     @FXML private Label p2d;
     @FXML private Label goldLabel2;
+    @FXML private Label skipLabel2;
     @FXML private Label battleLabel2;
     @FXML private ImageView barracks2;
     @FXML private ImageView p2path0;
     @FXML private ImageView p2path1;
     @FXML private ImageView p2path2;
+    @FXML private ImageView goldImage2;
+
+    //for coin animation
+    private Image[] coinFrames;
+    private int currentFrame = 0;
+    private Timeline animation;
+
+    //background imgs
+    private Image background;
+    private Image helpBackground;
+
 
     Player player1;
     Player player2;
@@ -50,13 +73,32 @@ public class GameWindowController {
 
     @FXML
     public void initialize() {
+
         backgroundImage.fitWidthProperty().bind(rootPane1.widthProperty());
         backgroundImage.fitHeightProperty().bind(rootPane1.heightProperty());
         rootPane1.requestFocus();
+
+        background = new Image(Objects.requireNonNull(getClass().getResource("/images/WOTWBackground.png")).toExternalForm());
+        helpBackground = new Image(Objects.requireNonNull(getClass().getResource("/images/WOTWBackgroundHelp.png")).toExternalForm());
+        backgroundImage.setImage(background);
+
+        showHelp.selectedProperty().addListener((obs, wasSelected, isNowSelected) -> {
+            if (isNowSelected) {
+                backgroundImage.setImage(helpBackground);
+            } else {
+                backgroundImage.setImage(background);
+            }
+        });
+
+        loadCoinImages();
+        setupAnimation();
+        animation.play();
     }
 
 
     public void startGame(Quiz quiz) {
+
+        Stage stage = (Stage) rootPane1.getScene().getWindow();
 
         //images
         final ImageView[][] pathImageViews = {{p1path0, p2path0}, {p1path1, p2path1}, {p1path2, p2path2}};
@@ -69,8 +111,8 @@ public class GameWindowController {
 
 
         //Making players
-        player1 = new Player(quiz, paths, feedbackLabel1,p1q,p1a,p1b,p1c,p1d,goldLabel1,battleLabel1, barracks1);
-        player2 = new Player(quiz, paths, feedbackLabel2,p2q,p2a,p2b,p2c,p2d,goldLabel2,battleLabel2, barracks2);
+        player1 = new Player(stage, quiz, paths, feedbackLabel1,p1q,p1a,p1b,p1c,p1d,goldLabel1,skipLabel1,battleLabel1, barracks1);
+        player2 = new Player(stage, quiz, paths, feedbackLabel2,p2q,p2a,p2b,p2c,p2d,goldLabel2,skipLabel2,battleLabel2, barracks2);
 
         //Starting quiz for the players
         player1.loadNextQuestion();
@@ -113,4 +155,59 @@ public class GameWindowController {
         }
 
     }
+
+    @FXML
+    protected void gameToStart(ActionEvent event) throws Exception {
+        System.out.println("main menu button pressed");
+
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Quit to Main Menu");
+        alert.setHeaderText("Quit to Main Menu?");
+        alert.setContentText("The Battle will end and all of your progress will be lost.");
+
+        Optional<ButtonType> result = alert.showAndWait();
+
+        if (result.isPresent() && result.get()==ButtonType.OK) {
+            System.out.println("Confirmed!");
+
+            Player.resetPlayerIds();
+
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("StartWindowUI.fxml"));
+            SceneChanger sceneChanger = new SceneChanger();
+            sceneChanger.changeScene(event,fxmlLoader);
+
+            MusicPlayer.getInstance().changeTrack(0);
+
+        } else {
+            System.out.println("Cancelled!");
+        }
+    }
+
+    @FXML
+    public void playHoverSound() {
+        SoundPlayer.play("hover.wav");
+    }
+    @FXML
+    public void playPressSound() {
+        SoundPlayer.play("press.mp3");
+    }
+
+    private void loadCoinImages() {
+        coinFrames = new Image[9];
+        for (int i = 0; i < 9; i++) {
+            String imageName = String.format("/images/goldCoin%d.png", i + 1);
+            coinFrames[i] = new Image(Objects.requireNonNull(getClass().getResource(imageName)).toExternalForm());
+        }
+    }
+
+
+    private void setupAnimation() {
+        animation = new Timeline(new KeyFrame(Duration.millis(100), event -> {
+            goldImage1.setImage(coinFrames[currentFrame]);
+            goldImage2.setImage(coinFrames[currentFrame]);
+            currentFrame = (currentFrame + 1) % coinFrames.length;
+        }));
+        animation.setCycleCount(Timeline.INDEFINITE);
+    }
+
 }
