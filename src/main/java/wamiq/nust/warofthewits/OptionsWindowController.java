@@ -27,7 +27,7 @@ public class OptionsWindowController {
 
     // Adjust this path to your actual quiz resources folder
     private final Path QUIZ_DEST_FOLDER = Paths.get(
-            "D:/WAMIQ-UL-ISLAM/.Wamiq new/Wamiq's VSC Code/WarOfTheWits/src/main/resources/quizes"
+            "src/main/resources/quizes"
     );
 
     public void initialize() {
